@@ -1,0 +1,62 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Actualizar Transaccion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formUdp">
+      <mat-form-field>            
+        <mat-label>DESCRIPCION</mat-label>
+        <input matInput #message maxlength="20" placeholder="pago, prestamo, etc" formControlName="VA_DESCRIPTION" width="40" >
+          <mat-hint align="end">{{message.value.length}} / 20</mat-hint>     
+      </mat-form-field>
+      &nbsp;
+      &nbsp;
+      <mat-form-field>
+        <mat-label>MONTO</mat-label>
+        <input type="number" matInput placeholder="1000" formControlName="VA_AMOUNT">
+      </mat-form-field>
+      &nbsp;
+      
+    </form>
+  </div>
+  <div class="modal-footer">
+    
+    <button type="button" class="btn btn-outline-dark" (click)="update()" [disabled]="formUdp.invalid">Save</button>
+  </div>
+</ng-template>
+
+
+
+<hr>
+
+
+
+<table class="table table-striped"> 
+    <th>ID Transacción</th>
+    <th>Descripción</th>
+    <th>Monto</th>
+    <th>Fecha</th>
+    <th style="width: 90px;">  </th>
+    <tr *ngFor="let transaction of transactions">
+        <td>{{transaction.NU_ID}}</td>
+        <td>{{transaction.VA_DESCRIPTION}}</td>
+        <td>{{transaction.VA_AMOUNT | currency}}</td>
+        <td>{{transaction.FE_CREATE_ON | date :'short'}}</td>
+        <td> <button mat-mini-fab color="primary" aria-label="borrarRegistro"
+            type="submit" (click) = "BorrarTabla(transaction.NU_ID)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" aria-label="borrarRegistro"
+            type="submit" (click) = "open(content,transaction)">
+            <mat-icon>update</mat-icon>
+          </button>
+        </td>
+    </tr>
+</table>
+
+
+
+

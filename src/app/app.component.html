@@ -1,0 +1,47 @@
+<mat-toolbar>
+  <span>Registro de Transacciones</span>
+</mat-toolbar>
+
+<main>
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="save($event)">
+        <mat-form-field>            
+          <mat-label>DESCRIPCION</mat-label>
+          <input matInput #message maxlength="20" placeholder="pago, prestamo, etc" formControlName="VA_DESCRIPTION" width="40" >
+            <mat-hint align="end">{{message.value.length}} / 20</mat-hint>     
+        </mat-form-field>
+        &nbsp;
+        &nbsp;
+        <mat-form-field>
+          <mat-label>MONTO</mat-label>
+          <input type="number" matInput placeholder="1,000,000.00" formControlName="VA_AMOUNT">
+        </mat-form-field>
+        &nbsp;
+        <button type="submit" mat-button mat-flat-button color="Link" [disabled]="form.invalid">Guardar</button> 
+    </form>
+    
+  </mat-card>
+  <br>
+  
+</main>
+<app-transactions></app-transactions>
+  <br><br>
+  
+  
+  <br><br>
+
+
+
+  
+
+
+
+
+
+
+
+   
+
+
+
+<router-outlet></router-outlet>
